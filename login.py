@@ -1,10 +1,36 @@
-import customtkinter, tkinter, os
+import customtkinter
+import tkinter
+import os
+import hashlib
 
+from keyauth import api
 from customtkinter import *
 from app import launch
 from user import User
 
 from PIL import ImageTk, Image
+
+def getchecksum():
+	path = os.path.basename(__file__)
+	if not os.path.exists(path):
+		path = path[:-2] + "exe"
+	md5_hash = hashlib.md5()
+	a_file = open(path,"rb")
+	content = a_file.read()
+	md5_hash.update(content)
+	digest = md5_hash.hexdigest()
+	return digest
+
+keyauthapp = api(
+    name = "Hyperium Optimizer",
+    ownerid = "BDpx6PTYbE",
+    secret = "7b0e6ee156ecea9a0fa0dd46dcde3b6aab13a3dfb5913cbc2038cadf69caf82b",
+    version = "1.0",
+    hash_to_check = getchecksum()
+)
+
+if keyauthapp.checkblacklist() == True:
+    exit()
 
 class Login(customtkinter.CTk):
 
@@ -19,7 +45,7 @@ class Login(customtkinter.CTk):
         self.protocol("WM_DELETE_WINDOW", self.onClose)
         self.resizable(False, False)
 
-        self.background = ImageTk.PhotoImage(Image.open("assets/gradient.png").resize((Login.WIDTH, Login.HEIGHT), Image.ANTIALIAS))
+        self.background = ImageTk.PhotoImage(Image.open("assets/gradient.png").resize((Login.WIDTH, Login.HEIGHT), Image.Resampling.LANCZOS))
 
         self.image_label = tkinter.Label(master = self, image = self.background)
         self.image_label.place(relx = 0.5, rely = 0.5, anchor = tkinter.CENTER)
@@ -43,6 +69,10 @@ class Login(customtkinter.CTk):
         self.destroy()
 
     def login(self):
+        try:
+            keyauthapp.login(self.username.get(), self.password.get())
+        except Exception as e:
+            print(e)
         user = User(self.username.get(), self.password.get())
         self.destroy()
         launch(user)

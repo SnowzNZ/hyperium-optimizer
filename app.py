@@ -47,7 +47,7 @@ class App(customtkinter.CTkToplevel):
         # -- -- Optimize
 
         self.left.rowconfigure((1, 2), minsize = 10)
-        self.optimize = CTkButton(master = self.left, width = 140, text = "Optimizer ", text_font = ("Roboto Medium", -16), fg_color = "#486ee0", hover_color = "#4063c9", image = ImageTk.PhotoImage(Image.open("assets/optimize.png").resize((20, 20), Image.ANTIALIAS)), command = lambda: [self.setAllButtonsToNormal(), self.optimize.configure(state = tkinter.DISABLED, fg_color = "#616160"), self.wm_title(f"Hyperium Optimizer v{self.version} | Optimize"), self.clearRightFrame(), self.optimizePanel()])
+        self.optimize = CTkButton(master = self.left, width = 140, text = "Optimizer ", text_font = ("Roboto Medium", -16), fg_color = "#bf6384", hover_color = "#4063c9", image = ImageTk.PhotoImage(Image.open("assets/optimize.png").resize((20, 20), Image.ANTIALIAS)), command = lambda: [self.setAllButtonsToNormal(), self.optimize.configure(state = tkinter.DISABLED, fg_color = "#616160"), self.wm_title(f"Hyperium Optimizer v{self.version} | Optimize"), self.clearRightFrame(), self.optimizePanel()])
         self.optimize.grid(row = 3, column = 0, padx = 5, pady = (0, 7))
 
         # -- -- Clean
