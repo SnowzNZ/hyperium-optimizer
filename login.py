@@ -4,6 +4,8 @@ from customtkinter import *
 from app import launch
 from user import User
 
+from PIL import ImageTk, Image
+
 class Login(customtkinter.CTk):
 
     WIDTH = 780
@@ -17,19 +19,25 @@ class Login(customtkinter.CTk):
         self.protocol("WM_DELETE_WINDOW", self.onClose)
         self.resizable(False, False)
 
-        self.grid_columnconfigure((0, 2), weight = 1)
+        self.background = ImageTk.PhotoImage(Image.open("assets/gradient.png").resize((Login.WIDTH, Login.HEIGHT), Image.ANTIALIAS))
 
-        title = CTkLabel(text = "Login", text_font = ("Roboto Medium", -32))
-        title.grid(row = 0, column = 1, pady = 20)
+        self.image_label = tkinter.Label(master = self, image = self.background)
+        self.image_label.place(relx = 0.5, rely = 0.5, anchor = tkinter.CENTER)
 
-        self.username = CTkEntry(placeholder_text = "Username")
-        self.username.grid(row = 1, column = 1, pady = (10, 80))
+        self.center = CTkFrame(master = self, height = Login.HEIGHT, width = 300, corner_radius = 0)
+        self.center.place(relx = 0.5, rely = 0.5, anchor = tkinter.CENTER)
 
-        self.password = CTkEntry(placeholder_text = "Password", show = "•")
-        self.password.grid(row = 1, column = 1, pady = (80, 80))
+        title = CTkLabel(master = self.center, text = "Login", text_font = ("Roboto Medium", -32))
+        title.place(relx = 0.5, rely = 0.1, anchor = tkinter.CENTER)
 
-        self.login = CTkButton(master = self, text = "Login", fg_color = "#486ee0", hover_color = "#4063c9", command = self.login)
-        self.login.grid(row = 1, column = 1, pady = (80, 0))
+        self.username = CTkEntry(master = self.center, placeholder_text = "Username")
+        self.username.place(relx = 0.5, rely = 0.2, anchor = tkinter.CENTER)
+
+        self.password = CTkEntry(master = self.center, placeholder_text = "Password", show = "•")
+        self.password.place(relx = 0.5, rely = 0.275, anchor = tkinter.CENTER)
+
+        self.login = CTkButton(master = self.center, text = "Login", fg_color = "#486ee0", hover_color = "#4063c9", command = self.login)
+        self.login.place(relx = 0.5, rely = 0.35, anchor = tkinter.CENTER)
 
     def onClose(self, event = 0):
         self.destroy()
