@@ -1,0 +1,3 @@
+tkinter
+customtkinter
+auth0-python
