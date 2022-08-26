@@ -1,4 +1,4 @@
-import tkinter, customtkinter, os
+import tkinter, customtkinter, os, asyncio
 
 from customtkinter import *
 from PIL import ImageTk, Image
