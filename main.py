@@ -2,7 +2,6 @@ import tkinter
 import tkinter.messagebox
 import customtkinter
 import os
-import time
 
 from customtkinter import *
 from PIL import ImageTk, Image
