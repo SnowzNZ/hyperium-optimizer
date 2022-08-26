@@ -1,4 +1,4 @@
-import tkinter, customtkinter, os
+import tkinter, customtkinter, os, asyncio
 
 from customtkinter import *
 from PIL import ImageTk, Image
@@ -63,7 +63,12 @@ class App(customtkinter.CTkToplevel):
         # -- -- Settings
 
         self.settings = CTkButton(master = self.left, width = 140, text = "Settings\t ", text_font = ("Roboto Medium", -16), fg_color = "#486ee0", hover_color = "#4063c9", image = ImageTk.PhotoImage(Image.open("assets/settings.png").resize((20, 20), Image.ANTIALIAS)), command = lambda: [self.setAllButtonsToNormal(), self.settings.configure(state = tkinter.DISABLED, fg_color = "#616160"), self.wm_title(f"Hyperium Optimizer v{self.version} | Settings"), self.clearRightFrame(), self.settingsPanel()])
-        self.settings.grid(row = 6, column = 0, padx = 5, pady = (7, 0))
+        self.settings.grid(row = 6, column = 0, padx = 5, pady = 7)
+
+        # -- -- Account
+
+        self.account = CTkButton(master = self.left, width = 140, text = "Account\t ", text_font = ("Roboto Medium", -16), fg_color = "#486ee0", hover_color = "#4063c9", image = ImageTk.PhotoImage(Image.open("assets/account.png").resize((20, 20), Image.ANTIALIAS)), command = lambda: [self.setAllButtonsToNormal(), self.account.configure(state = tkinter.DISABLED, fg_color = "#616160"), self.wm_title(f"Hyperium Optimizer v{self.version} | Account"), self.clearRightFrame(), self.accountPanel()])
+        self.account.grid(row = 7, column = 0, padx = 5, pady = (7, 0))
 
         # -- Right Frame
 
@@ -88,6 +93,9 @@ class App(customtkinter.CTkToplevel):
         example = CTkSlider(master = self.right, from_ = 0, to = 100, button_length = 10, button_color = "#486ee0", button_hover_color = "#4063c9")
         example.grid(row = 1, column = 0, padx = 20)
 
+    def accountPanel(self):
+        pass
+
     def clearRightFrame(self):
         self.right.destroy()
         self.right = customtkinter.CTkFrame(master = self)
@@ -98,6 +106,7 @@ class App(customtkinter.CTkToplevel):
         self.clean.configure(state = tkinter.NORMAL, fg_color = "#486ee0")
         self.virusScan.configure(state = tkinter.NORMAL, fg_color = "#486ee0")
         self.settings.configure(state = tkinter.NORMAL, fg_color = "#486ee0")
+        self.account.configure(state = tkinter.NORMAL, fg_color = "#486ee0")
 
     def onClose(self, event = 0):
         self.destroy()
