@@ -1,57 +1,43 @@
-import tkinter
-import tkinter.messagebox
-import customtkinter
+import customtkinter, tkinter, os
 
-customtkinter.set_appearance_mode("System")
-customtkinter.set_default_color_theme("blue")
+from customtkinter import *
+from app import launch
+from user import User
 
-class LoginFrame(customtkinter.CTkFrame):
-    def __init__(self, *args, header_name="RadioButtonFrame", **kwargs):
-        super().__init__(*args, **kwargs)
-        
-        self.header_name = header_name
+class Login(customtkinter.CTk):
 
-        self.header = customtkinter.CTkLabel(self, text=self.header_name)
-        self.header.grid(row=0, column=0, padx=10, pady=10)
+    WIDTH = 780
+    HEIGHT = 520
 
-        self.radio_button_var = customtkinter.StringVar(value="")
-
-        self.radio_button_1 = customtkinter.CTkRadioButton(self, text="Option 1", value="Option 1", variable=self.radio_button_var)
-        self.radio_button_1.grid(row=1, column=0, padx=10, pady=10)
-        self.radio_button_2 = customtkinter.CTkRadioButton(self, text="Option 2", value="Option 2", variable=self.radio_button_var)
-        self.radio_button_2.grid(row=2, column=0, padx=10, pady=10)
-        self.radio_button_3 = customtkinter.CTkRadioButton(self, text="Option 3", value="Option 3", variable=self.radio_button_var)
-        self.radio_button_3.grid(row=3, column=0, padx=10, pady=(10, 20))
-
-    def get_value(self):
-        """ returns selected value as a string, returns an empty string if nothing selected """
-        return self.radio_button_var.get()
-
-    def set_value(self, selection):
-        """ selects the corresponding radio button, selects nothing if no corresponding radio button """
-        self.radio_button_var.set(selection)
-
-class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
 
-        self.geometry("500x300")
-        self.title("RadioButtonFrame test")
+        self.title(f"Hyperium Optimizer | Login")
+        self.geometry(f"{self.WIDTH}x{self.HEIGHT}")
+        self.protocol("WM_DELETE_WINDOW", self.onClose)
+        self.resizable(False, False)
 
-        # create radio button frame 2 with print button
-        self.radio_button_frame_2 = LoginFrame(self, header_name="RadioButtonFrame 2")
-        self.radio_button_frame_2.grid(row=0, column=1, padx=20, pady=20)
+        self.grid_columnconfigure((0, 2), weight = 1)
 
-        self.frame_2_button = customtkinter.CTkButton(self, text="Print value of frame 2", command=self.print_value_frame_1)
-        self.frame_2_button.grid(row=1, column=1, padx=20, pady=10)
+        title = CTkLabel(text = "Login", text_font = ("Roboto Medium", -32))
+        title.grid(row = 0, column = 1, pady = 20)
 
-    def print_value_frame_1(self):
-        print(f"Frame 1 value: {self.radio_button_frame_1.get_value()}")
+        self.username = CTkEntry(placeholder_text = "Username")
+        self.username.grid(row = 1, column = 1, pady = (10, 80))
 
-    def print_value_frame_2(self):
-        print(f"Frame 2 value: {self.radio_button_frame_2.get_value()}")
+        self.password = CTkEntry(placeholder_text = "Password", show = "•")
+        self.password.grid(row = 1, column = 1, pady = (80, 80))
 
+        self.login = CTkButton(master = self, text = "Login", fg_color = "#486ee0", hover_color = "#4063c9", command = self.login)
+        self.login.grid(row = 1, column = 1, pady = (80, 0))
 
-if __name__ == "__main__":
-    app = App()
-    app.mainloop()
+    def onClose(self, event = 0):
+        self.destroy()
+
+    def login(self):
+        user = User(self.username.get(), self.password.get())
+        self.destroy()
+        launch(user)
+
+app = Login()
+app.mainloop()
