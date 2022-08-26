@@ -24,7 +24,7 @@ class Login(customtkinter.CTk):
         self.image_label = tkinter.Label(master = self, image = self.background)
         self.image_label.place(relx = 0.5, rely = 0.5, anchor = tkinter.CENTER)
 
-        self.center = CTkFrame(master = self, height = Login.HEIGHT, width = 300, corner_radius = 0)
+        self.center = CTkFrame(master = self, height = Login.HEIGHT, width = 270, corner_radius = 0)
         self.center.place(relx = 0.5, rely = 0.5, anchor = tkinter.CENTER)
 
         title = CTkLabel(master = self.center, text = "Login", text_font = ("Roboto Medium", -32))
