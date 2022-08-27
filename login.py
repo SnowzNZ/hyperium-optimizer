@@ -2,6 +2,7 @@ import customtkinter
 import tkinter
 import os
 import hashlib
+import keyboard
 
 from keyauth import api
 from customtkinter import *
