@@ -113,11 +113,12 @@ class api:
         json = jsond.loads(response)
 
         if json["success"]:
-            print("successfully registered")
+            #print("successfully registered")
             self.__load_user_data(json["info"])
         else:
-            print(json["message"])
-            os._exit(1)
+            return json["message"]
+            #print(json["message"])
+            #os._exit(1)
 
     def upgrade(self, user, license):
         self.checkinit()
@@ -173,10 +174,11 @@ class api:
 
         if json["success"]:
             self.__load_user_data(json["info"])
-            print("successfully logged in")
+            #print("successfully logged in")
         else:
-            print(json["message"])
-            os._exit(1)
+            return json["message"]
+            #print(json["message"])
+            #os._exit(1)
 
     def license(self, key, hwid=None):
         self.checkinit()
