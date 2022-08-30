@@ -1,27 +1,16 @@
-import win32security #get sid
-import json as jsond  # json
-
-import time  # sleep before exit
-
-import binascii  # hex encoding
-
-from uuid import uuid4  # gen random guid
+import win32security
+import json as jsond
+import time
+import binascii
 import platform
 import os
-import requests # https requests
-from requests_toolbelt.adapters.fingerprint import FingerprintAdapter
+import requests
 
-try:
-    from Crypto.Cipher import AES
-    from Crypto.Hash import SHA256
-    from Crypto.Util.Padding import pad, unpad    
-except ModuleNotFoundError:
-    print("Exception when importing modules")
-    print("installing necessary modules....")
-    os.system("pip install pycryptodome")
-    print("Modules installed!")
-    time.sleep(1.5)
-    exit(0)
+from uuid import uuid4
+from requests_toolbelt.adapters.fingerprint import FingerprintAdapter
+from Crypto.Cipher import AES
+from Crypto.Hash import SHA256
+from Crypto.Util.Padding import pad, unpad
 
 class api:
     name = ownerid = secret = version = hash_to_check = ""

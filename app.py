@@ -2,7 +2,7 @@
 
 import tkinter, customtkinter, os, json, pyperclip
 from win10toast import ToastNotifier
-
+from tkinter import messagebox
 from customtkinter import *
 from PIL import ImageTk, Image
 from application import auth
@@ -42,6 +42,7 @@ class App(CTkToplevel):
         self.foreground = colour_theme[0]
         self.hover_colour = colour_theme[1]
         self.disabled_colour = colour_theme[2]
+        self.text_colour = "#ffffff"
 
         # Frames
 
@@ -57,6 +58,9 @@ class App(CTkToplevel):
     def optimizePanel(self):
         label = CTkLabel(master = self.right, text = "Optimize Panel", text_font = ("Roboto Medium", -22))
         label.grid(row = 0, column = 0, pady = 20, padx = 20)
+
+        option = CTkSwitch(master = self.right, text = "Kill all faggots", command = lambda: messagebox.showinfo("Received", option.getint()))
+        option.grid(row = 1, row = 2)
         
     def cleanPanel(self):
         label = CTkLabel(master = self.right, text = "Clean Panel", text_font = ("Roboto Medium", -22))

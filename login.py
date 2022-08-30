@@ -116,7 +116,7 @@ class MainMenu(CTk):
         elif len(password) < 5:
             return showerror("Oops", "Password length must be greater than 4 characters!")
 
-        register = auth.register(username, password, "QWTJI9-IHO90K-IWGMXT-T1EVQX-QPUPTG-XTY8LB")
+        register = auth.register(username, password, "5BE5QH-ZL9MVD-A02PGV-MGWO21-JR16NY-6R98ZA")
 
         if register != None:
             return showerror("An Error Occured", register)
